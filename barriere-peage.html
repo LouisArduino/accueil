@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="français">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="commun.css">
+    <title>Barrière Péage</title>
+</head>
+<body>
+        <div class="header">
+            <a href="index.html" id="accueil"><img src="home_24dp_FFFFFF_FILL0_wght500_GRAD0_opsz24.svg" alt="icone de maison"><span class="nav-texte">Accueil</span></a>
+            <a href="definitions.html" id="definitions"><img src="manage_search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de loupe qui cherche dans un texte"><span class="nav-texte">Définitions</span></a>
+            <a href="https://github.com/LouisArduino" id="moi" target="_blank"><img src="person_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de personne"><span class="nav-texte">Moi</span></a>
+            <a href="https://projecthub.arduino.cc" id="arduino" target="_blank"><img src="all_inclusive_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone infini"><span class="nav-texte">Arduino</span></a>
+            <a href="javascript:void(0);" id="btn-sommaire"><img src="menu_open_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Sommaire"><span class="nav-texte">Sommaire</span></a>
+</div>
+            
+    </div>
+    <div class="page">
+    <div class="som">
+        <span class="som-titre"><h3 id="somtitle">Sommaire :</h3>
+            
+        </span>
+        <ul>
+    <details>
+        <summary><u>Explications</u></summary>
+            <ul>
+                <li class="sommaire"><a href="#intro">Intro</a></li>
+                <li class="sommaire"><a href="#quelques def">Définitions</a></li>
+                <li class="sommaire"><a href="#composants">Composants</a></li>
+                <li class="sommaire"><a href="#fonctionnement">Fonctionnement</a></li>
+            </ul>
+    </details>
+    <details>
+            <summary><u>Schémas</u></summary>
+            <ul class="sommmaire">
+                <li class="sommaire"><a href="#exp_schs">Explications du schéma</a></li>
+                <li class="sommmire"><a href="#sch_cpt">Schéma complet</a></li>
+            </ul>
+    </details>
+    <details>
+            <summary><u>Code</u></summary>
+            <ul class="sommmaire">
+                <li class="sommaire"><a href="#setup">Setup</a></li>
+                <li class="sommaire"><a href="#racc">Raccourcis</a></li>
+                <li class="sommaire"><a href="#loop">Loop</a></li>
+            </ul>
+     </details>
+               <summary><a href="#video" id="video-link"><u>Vidéo</u></a></summary>
+        </ul>
+    </div>
+    <div class="texte">
+    <main>
+    <header>
+        <h1 id="title">Projet arduino de barrière Péage</h1>
+    </header>
+    <div class="Explications">
+        <h2 id="Explications"><strong>I Explications</strong></h2>
+        <img src="PresentationPeage.png" id="presentation" class="img">
+        <section class="section">
+        <h3 id="intro">Introduction du projet :</h3>
+        <article>
+            Bienvenue dans ce projet qui complète un peu le projet de <a href="GarageAuto.html"><u>Garage automatique</u></a>, puisse qu'il utilise a peu près les mêmes composants que cet ancien projet.
+            C'est tous simplement un péage, il utilise 2 capteurs de distance pour limiter les risques d'erreurs et ne pas refermer la porte s'il y a une voiture en dessous.</a>
+        </article>
+        <section class="section">
+            <h3 id="composants">Composants utilisés :</h3>
+            <article><p>
+            <h4>Composants d'<strong>entrée</strong></h4>
+                <ul>
+                <li><strong>Capteur de distance :</strong> C'est une des pièces les plus importantes du projet, c'est elle qui va détecter la voiture devant la porte de garage 
+                pour permettre d'ouvrir la porte.</li>
+                <li><strong>Bouton : </strong>Il sert à ouvrir la barrière pour passer au péage.</li>
+                </ul>
+            <h4>Composants de <strong>sortie</strong></h4>
+            <ul>
+                <li><strong>Servomoteur : </strong>C'est un moteur très important car il nous servira pour ouvrir la porte de garage. Il est connecté à un strong <strong>pin digital PWM</strong>.</li>
+                <li><strong>Led : </strong>Elle est simplement relié à un pin digital* (ici, pin 11). Nous n'utiliseront poas le signal PWM. Elle nous servira à annoncer que la porte va se déplacer.</li>
+                <li><strong>Buzzer :</strong> Il nous servira pour nous prévenir qu'une voiture a été détectée et que la porte va s'ouvrir.</li>
+            </ul>
+            <h4>Carte électronique :</h4>
+            <ul>
+                <li>Arduino UNO R4 minima</li>
+            </ul></p>
+            </article>
+        </section>
+        <section class="section">
+            <h3>Fonctionnement du projet :</h3>
+            <h4>Fonctionnement des composants indépendants :</h4>
+            <article><p>
+                <strong>Le servomoteur : </strong>Il se déplace en observant le signal PWM d'un pin digital. En tempos réel, il regarde combine de temps la pin digital lui envoie 
+                un <strong>signal Haut</strong> pour le comparer au signal suivant. Il est dôté d'un potentiomètre pour savoir ou il est dans l'espace et savoir de combine de degré 
+                il faut qu'il se déplace et pouvoir se corriger en temps réel.
+                <br>
+                <br>
+                <strong>Le capteur de distance : </strong>Il y a <strong>4 broches</strong> : <strong>5V et GND</strong> et 2 autres broches : <strong>TRIG </strong>et <strong>ECHO
+                </strong>. Le premier, <strong>TRIG</strong>, c'est la broche qui est relié à l'emetteur, le second, <strong>ECHO</strong> est relié au receveur.<br>
+                On envoie du courant à TRIG et on démarre un chronomètre au bout de 10 microsecondes (pour stabiliser), on arrête d'envoyer du courant à <strong>l'emetteur</strong> 
+                et on active <strong>ECHO</strong> pour receoir le signal, quand <strong>ECHO</strong> reçoit le signal, on arrête le chronomètre. Maintenant on a une <strong>mesure de temps :</strong> le 
+                temps que met l'onde sonore pour faire <strong>un allé vers l'objet puis revenir</strong>, on connais la vitesse du son dans l'air on <strong>multiplie</strong> ce temps par <strong>la vitesse du son</strong> et on <strong>divise par 
+                2</strong> (car l'onde sonore fait un allé et retour), on a notre distance ! On stocke cette distance dans une variable et on fait ça des centaines de fois par seconde pour connaitre 
+                précisément la distance de l'objet devant nous.
+                <br>
+                <br>
+                <strong>Ecran OLED : </strong>L'écran OLED est un peu plus compliqué, il utilise les pin A5 et A4 car ils sont compatibles SCL et SDA, ce sont des technologies qu'utilise notre écran. Nous utilisons une bibliothèque spéciale pour cet écran.
+                Attention si vous essayez de réutiliser l'écran faites attention à la mémoire de votre carte, l'écran consomme beaucoup de mémoire pour être fluide, si vous utiliser une carte 
+                arduino UNO R4 c'est bon car il y a 32ko de mémoire mais une R3 n'a que 4ko donc il faudra utiliser un autre moyen plus léger. Vérifier bien la mémoire de votre microcontrôleur.</p>
+            </article>
+            <br>
+            <br>
+            <h3 id="fonctionnement">Fonctionnemnt du projet :</h3>
+            <article><p>
+            <p>Nous utilisont une machine à état également, mais ici, il y a <strong>6 états</strong> (0 à 5). <br>
+            <strong>L'état 0</strong> est l'état de base, il englobe aussi le fait que la barrière s'ouvre puisse qu'il n'y a pas de chrono, elle s'ouvre à partir du 
+            moment ou le bouton est appuillé. <br>
+            <strong>L'état 1 et 2</strong> sont des <i>"micro étapes"</i> la première sert à vérifier si un voiture est détectée, si oui, elle lance un chrono et la deuxième regarde si au 
+            bout de 500ms si la voiture est toujours la et si oui passe à l'étape 3 sinon on retourne à l'étape 1 qui attends que la voiture passe. Cela évite les problèmes 
+            de capteur car une voiture ne peut pas rester moins de 10ms sous le cateur donc cela permet d'petre sur que la valeur correspond bien à la voiture qui passe. <br>
+            <strong>L'état 3</strong> regarde si au bout de 500ms la voiture est partie, si oui, elle ferme la barrière, sinon, elle écrit obstacle dans le moniteur série et affiche <i>"veuillez 
+            passer"</i> sur l'écran et passe à l'étape 4. Quand la barrière est fermée, on retourne à l'étape 0 pour recommencer. <br>
+            <strong>L'état 4 :</strong>Si l'obstacle n'est plus présent on passe à l'étape 5. <br>
+            <strong>L'étape 5</strong> consite à fermer la porte et écrire merci sur l'écran. À la fin, on retourne à l'étape 0.
+
+
+
+            </p>
+            </article>
+            <br><br>
+        </section>
+    </div>
+    <div class="Schemas">
+            <h2 id="partie 2"><strong>II - schémas</strong></h2><br>
+        <section class="section">
+            <h3 id="exp_schs">Explication du schéma :</h3>
+            <h3 class="exp_schs">Schéma du servomoteur :</h3>
+            <div class="contener">
+                <!--Image du schéma du servomoteur-->
+                <img src="ServoPeage.png" alt="Shéma du capteur du servomoteur" class="img">
+                <div class="in" id="txt"><p>Ci-contre, le <strong>schéma du servomoteur</strong>. On voit qu'il est branché au <strong>pin digital N°9</strong> car c'est un pin digital compatible PWM, 
+                il est aussi relié au <strong>5V</strong> et au <strong>GND</strong>.</p></div>
+            </div>
+            <h3>Schéma des capteurs de distance</h3>
+            <div class="contener">
+                <!--Image du schéma du capteur de distance-->
+                <img src="CateursDistancePeage.png" alt="Shéma des capteurs de distance" class="img">
+                <div class="in"><p>Voici le <strong>schéma des capteurs de distance :</strong> <br> Pour <strong>le premier</strong>, la broche TRIG est reliée <strong>au pin digital N°2</strong> et ECHO au pin digital <strong>N°3</strong>, la broche VCC est reliée au <strong>5V</strong> et la broche GND au <strong>GND</strong>.<br>
+                Pour le <strong>schéma du deuxième capteur de distance</strong>, la broche TRIG est reliée <strong>au pin digital N°4</strong> et ECHO au pin digital <strong>N°5</strong>, la masse et le VCC sont identiques.</p></div>
+            </div>
+            <h3>Schéma de l'écran OLED</h3>
+            <div class="contener">
+                <!--Image du schéma de l'écran OLED-->
+                <img src="Shémai2cBarriere.png" alt="Shéma du cablage de l'écran i2c" class="img">
+                <div class="in"><p>Pour <strong>l'écran OLED</strong>. Les broches SCL et SDA sont respectivement reliées aux pins A5 et A4, elles sont compatibles avec SCL et SDA que l'écran utilise. Les broches VCC et GND sont reliées au <strong>5V</strong> et au <strong>GND</strong>.</p></div> 
+            </div>
+            <h3>Shéma du buzzer et du bouton</h3>
+            <div class="contener">
+                <img src="BuzzerButtonPeage.png" alt="Shéma du buzzer et du bouton" class="img">
+                <div class="in"><p>Voici le shéma du <strong>buzzer et du bouton</strong>. Le bouton est branché sur le <strong>pin n°9</strong> et relié à la <strong>masse</strong>, le buzzer est relié au <strong>pin N°6</strong> et également à la <strong>masse</strong>.</p></div>
+            </div>
+            <h3>Shéma du servomoteur</h3>
+            <div class="contener">
+                <!--Image du schéma du servomoteur-->
+                <img src="ServoPeage.png" alt="Shéma du capteur du servomoteur" class="img">
+                <div class="in" id="txt"><p>Ci-contre, le <strong>schéma du servomoteur</strong>. On voit qu'il est branché au <strong>pin digital N°9</strong> car c'est un pin digital compatible PWM, 
+                il est aussi relié au <strong>5V</strong> et au <strong>GND</strong>.</p></div>
+            </div>
+        <p class="explcode"><a href="Shéma completBarriere.png" dowload target="_blank"><u>Télécharger le shéma complet</u></a></p>
+        </section>
+    </div>
+    <div class="Code">
+            <h2>III - code</h2>
+        <section class="section">
+            <h3 id="setup">Setup :</h3>
+            <div class="contener">
+                    <pre class="code-window"><code><span class="turquoise">void</span> <span class="orange">setup</span>() {
+  <span class="orange">myservo</span>.<spanclass="orange">attach</span>(<span class="turquoiseclair">9</span>);
+  <span class="orange">pinMode</span>(button, INPUT_PULLUP);
+  <span class="orange">pinMode</span>(PIN_TRIG, OUTPUT);
+  <span class="orange">pinMode</span>(PIN_TRIGB, OUTPUT);
+  <span class="orange">pinMode</span>(PIN_ECHO, INPUT);
+  <span class="orange">pinMode</span>(PIN_ECHOB, INPUT);
+  <span class="orange">pinMode</span>(buzzer, OUTPUT);
+  <span class="orange">pinMode</span>(led_Red, OUTPUT);
+  <span class="orange">pinMode</span>(led_Green, OUTPUT);
+  <span class="orange">myservo</span>.<span class="orange">write</span>(<span class="turquoiseclair">0</span>);
+  <span class="orange">Serial</span>.<span class="orange">begin</span>(<span class="turquoiseclair">9600</span>);
+  <span class="orange">u8g2</span>.<span class="orange">begin</span>();
+  <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+  <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB18_tr);
+  <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">10</span>, <span class="turquoiseclair">30</span>, <span class="turquoiseclair">"Bonjour !"</span>);
+  <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+}</code></pre>
+                <p class="explcode">Ici, on initie le servomoteur sur la pin PWM N°9, initie l'écran et définisons les composants 
+                en entrée ou en sortie.
+                </p>
+            </div>
+            <h3 id="racc">Les définitons pour l'écran et le servomoteur :</h3>
+            <h4>Bibliothèques</h4>
+                <p>Voici les bibliothèques que l'on inclu avec #include pour utiliser le servomoteur et l'écran.</p>
+            <div class="contener">
+                <pre class="code-window"><code><span class="violet">#include</span> <span class="turquoise">&lt;Servo.h&gt;</span>
+<span class="violet">#include</span><span class="turquoise"> &lt;U8g2lib.h&gt;</span></code></pre>
+                <p>Servo.h est une bibliothèque pour le servomoteur, elle a des fonctions simples.</p>
+                <p>U8g2lib.h est une bibliothèque pour l'écran, elle a des fonctions simples pour écrire et dessinersur l'écran.</p>
+            </div>
+                <h4>Servomoteur</h4>
+                <div class="contener">
+                    <pre class="code-window"><code>Servo myservo;</code></pre>
+                    <p><i>myservo est une fonction de la librairie servo, elle sert a doné un nom à notre servomoteur pour pouvoir le désigner.</i></p>
+                </div>
+                <h4>Ecran</h4>
+                <div class="contener">
+                    <pre class="code-window" id="initiatescreen"><code>U8G2_SSD1306_128X64_NONAME_F_HW_I2C <span class="orange">u8g2</span>(U8G2_R0, <span class="gris">/* reset=*/</span> U8X8_PIN_NONE);</code></pre>
+                    <p>Cette ligne sert à renseigner les caractéristiques de l'écran pour que la bibliothèque sache comment envoyer les infos, on ne précise pas sur quelle broche il se trouve 
+                    car on ne peut en même qu'un seul par carte, on les connectent aux broches A5 et A4 de la carte qui gèrent l'écran i2c.
+                    </p>
+                </div>
+                <br>
+                
+            <h3 id="loop">Loop</h3>
+            <div class="contener" id="contenerloop">
+                <pre class="code-window" id="loop"><code><span class="turquoise">void</span> <span class="orange">loop</span>() {
+  <span class="turquoise">unsigned</span> <span class="turquoise">long</span> actuel = <span class="orange">millis</span>();
+
+  <span class="gris">// --- Mesure de distance, une fois toutes les 60 ms ---</span>
+  <span class="orange">if</span> (actuel - derniereMesure >= <span class="turquoiseclair">60</span>) {
+    derniereMesure = actuel;
+
+    <span class="orange">digitalWrite</span>(PIN_TRIG, LOW);
+    <span class="orange">delayMicroseconds</span>(<span class="turquoiseclair">2</span>);
+    <span class="orange">digitalWrite</span>(PIN_TRIG, HIGH);
+    <span class="orange">delayMicroseconds</span>(<span class="turquoiseclair">10</span>);
+    <span class="orange">digitalWrite</span>(PIN_TRIG, LOW);
+
+    <span class="turquoise">long</span> dure = <span class="orange">pulseIn</span>(PIN_ECHO, HIGH, <span class="turquoiseclair">30000</span>);  <span class="gris">// timeout 30 ms</span>
+    <span class="orange">if</span> (dure > <span class="turquoiseclair">0</span>) {                              <span class="gris">// ignore mesures ratées</span>
+      <span class="turquoise">long</span> d = (dure * <span class="turquoiseclair">0.034</span>) / <span class="turquoiseclair">2</span>;
+      distance = <span class="orange">constrain</span>(d, <span class="turquoiseclair">2</span>, <span class="turquoiseclair">100</span>);
+    }
+    <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"distance"</span>);
+    <span class="orange">Serial</span>.<span class="orange">println</span>(distance);   <span class="gris">// à retirer une fois que tout marche</span>
+  }
+  <span class="orange">if</span> (actuel - derniereMesureB >= <span class="turquoiseclair">60</span>) {
+    derniereMesureB = actuel;
+
+    <span class="orange">digitalWrite</span>(PIN_TRIGB, LOW);
+    <span class="orange">delayMicroseconds</span>(<span class="turquoiseclair">2</span>);
+    <span class="orange">digitalWrite</span>(PIN_TRIGB, HIGH);
+    <span class="orange">delayMicroseconds</span>(<span class="turquoiseclair">10</span>);
+    <span class="orange">digitalWrite</span>(PIN_TRIGB, LOW);
+
+    <span class="turquoise">long</span> dureB = <span class="orange">pulseIn</span>(PIN_ECHOB, HIGH, <span class="turquoiseclair">30000</span>);  <span class="gris">// timeout 30 ms</span>
+    <span class="orange">if</span> (dureB > <span class="turquoiseclair">0</span>) {                              <span class="gris">// ignore mesures ratées</span>
+      <span class="turquoise">long</span> dB = (dureB * <span class="turquoiseclair">0.034</span>) / <span class="turquoiseclair">2</span>;
+      distanceB = <span class="orange">constrain</span>(dB, <span class="turquoiseclair">2</span>, <span class="turquoiseclair">100</span>);
+    }
+    <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"distance B"</span>);
+    <span class="orange">Serial</span>.<span class="orange">println</span>(distanceB);   <span class="gris">// à retirer une fois que tout marche</span>
+  }
+
+  <span class="gris">// --- Machine à états ---</span>
+  <span class="orange">if</span> (etape == <span class="turquoiseclair">0</span>) {
+    <span class="orange">digitalWrite</span>(led_Red, HIGH);
+    <span class="orange">digitalWrite</span>(led_Green, LOW);
+    <span class="orange">if</span> (!dejaDitB) {
+      <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+      <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB18_tr);
+      <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">10</span>, <span class="turquoiseclair">30</span>, <span class="turquoiseclair">"Bonjour !"</span>);
+      <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+      dejaDitB = <span class="turquoise">true</span>;
+    }
+    <span class="gris">// Attente du bouton</span>
+    <span class="orange">if</span> (<span class="orange">digitalRead</span>(button) == LOW) {
+      <span class="orange">tone</span>(buzzer, <span class="turquoiseclair">1175</span>, <span class="turquoiseclair">300</span>);
+      <span class="orange">myservo</span>.<span class="orange">write</span>(<span class="turquoiseclair">50</span>);
+      depart = actuel;
+      <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"Bouton appuyé, barrière ouverte"</span>);
+      <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+      <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB12_tr);
+      <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">10</span>, <span class="turquoiseclair">30</span>, <span class="turquoiseclair">"Barrière ouverte."</span>);
+      <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+      <span class="orange">digitalWrite</span>(led_Red, LOW);
+      <span class="orange">digitalWrite</span>(led_Green, HIGH);
+      etape = <span class="turquoiseclair">1</span>;
+    }
+
+  } <span class="orange">else</span> <span class="orange">if</span> (etape == <span class="turquoiseclair">1</span>) {
+    <span class="orange">if</span> (distance < <span class="turquoiseclair">9</span>) {
+      depart = actuel;
+      etape = <span class="turquoiseclair">2</span>;
+    }
+  } <span class="orange">else</span> <span class="orange">if</span> (etape == <span class="turquoiseclair">2</span>) {
+    <span class="orange">if</span> (distance < <span class="turquoiseclair">9</span>) {
+      <span class="orange">if</span> (actuel - depart >= <span class="turquoiseclair">500</span>) {
+        depart = actuel;
+        etape = <span class="turquoiseclair">3</span>;
+      }
+    } <span class="orange">else</span> {
+      etape = <span class="turquoiseclair">1</span>;
+    }
+
+  } <span class="orange">else</span> <span class="orange">if</span> (etape == <span class="turquoiseclair">3</span>) {
+    <span class="orange">if</span> (actuel - depart >= <span class="turquoiseclair">500</span>) {
+      <span class="orange">if</span> (distance >= <span class="turquoiseclair">9</span> && distanceB > <span class="turquoiseclair">4</span>) {
+        <span class="orange">myservo</span>.<span class="orange">write</span>(<span class="turquoiseclair">0</span>);
+        <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"Barrière fermée"</span>);
+        <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+        <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB18_tr);
+        <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">30</span>, <span class="turquoiseclair">60</span>, <span class="turquoiseclair">"Merci !"</span>);
+        <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+        <span class="orange">digitalWrite</span>(led_Red, HIGH);
+        <span class="orange">digitalWrite</span>(led_Green, LOW);
+        dejaDit = <span class="turquoise">false</span>;
+        dejaDitB = <span class="turquoise">false</span>;
+        <span class="orange">delay</span>(<span class="turquoiseclair">500</span>);
+        etape = <span class="turquoiseclair">0</span>;
+      } <span class="orange">else</span> {
+        <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"Obstacle"</span>);
+        <span class="orange">if</span> (!dejaDit) {
+          <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+          <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB12_tr);
+          <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">10</span>, <span class="turquoiseclair">30</span>, <span class="turquoiseclair">"Veuillez passer"</span>);
+          <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+          dejaDit = <span class="turquoise">true</span>;
+        }
+        etape = <span class="turquoiseclair">4</span>;
+      }
+    }
+  } <span class="orange">else</span> <span class="orange">if</span> (etape == <span class="turquoiseclair">4</span>) {
+    <span class="gris">// Obstacle présent : on attend qu'il parte</span>
+    <span class="orange">if</span> (distance >= <span class="turquoiseclair">9</span> && distanceB > <span class="turquoiseclair">4</span>) {
+      depart = actuel;   <span class="gris">// le chrono démarre ici, une seule fois</span>
+      etape = <span class="turquoiseclair">5</span>;
+    }
+
+  } <span class="orange">else</span> <span class="orange">if</span> (etape == <span class="turquoiseclair">5</span>) {
+    <span class="orange">myservo</span>.<span class="orange">write</span>(<span class="turquoiseclair">0</span>);
+    <span class="orange">Serial</span>.<span class="orange">println</span>(<span class="turquoiseclair">"Merci !"</span>);
+    <span class="orange">u8g2</span>.<span class="orange">clearBuffer</span>();
+    <span class="orange">u8g2</span>.<span class="orange">setFont</span>(u8g2_font_helvB18_tr);
+    <span class="orange">u8g2</span>.<span class="orange">drawStr</span>(<span class="turquoiseclair">10</span>, <span class="turquoiseclair">30</span>, <span class="turquoiseclair">"Merci !"</span>);
+    <span class="orange">u8g2</span>.<span class="orange">sendBuffer</span>();
+    <span class="orange">digitalWrite</span>(led_Red, HIGH);
+    <span class="orange">digitalWrite</span>(led_Green, LOW);
+    dejaDit = <span class="turquoise">false</span>;
+    dejaDitB = <span class="turquoise">false</span>;
+    <span class="orange">delay</span>(<span class="turquoiseclair">500</span>);
+    etape = <span class="turquoiseclair">0</span>;
+  }
+}</code></pre>
+                <p class="explcode">On initie <i>actuel</i> qui est égal à <i>millis()</i>. Ensuite, on mesure la distance toutes les ms sur les 2 capteurs de distance.<br>
+                On commence à l'état 0, on allume la led rouge du feu bicolore, On affiche <i>Bonjour !</i> sur l'écran, le déjaDit sert à ne l'afficher qu'une seule fois p
+                our ne pas surchager la mémoire. Quand le bouton est appuillé, on allume le buzzer avec une tonalité de 1175 pendant 300 milisecondes et on ouvre la porte. 
+                On met a jour départ qui nous servira a savoir depuis combien de temps la barrière est ouverte. On affiche dans le moniteur et sur l'écran <i>Barrière ouver
+                te</i> et on allume la led verte (en éteignant la led rouge). On passe à l'état 1. <br>Si un voiture est présente, soit une distance inférieure à 9cm, on me
+                t a jour le chrono et passe à l'état 2. Si la voiture est toujours là au bout de 500 milisecondes on met a jour le chrono (oui encore) et on passe à l'état 
+                3. Sinon soit la distance supérieure à 9cm, on retourne à l'état 1, l'étape 2 nous sert à vérifier si la voiture rest au moins 500 milisecondes sous le capt
+                eur pour être sur Que ce soit une voiture qui passe et pas un bug du capteur. <br>Si ça fait 500 milisecondes donc, on vérifie que distance est supérieure à 
+                9 et que distanceB est supérieure à 4. Cette vérification à double capteur permet d'être sûr que la voiture ne se trouve pas dessous. En effet, les voitures 
+                on des formes spéciales qui mennent à faire croire au capteur que la voiture est absente, avec un deux capteurs, le risque est minimisé. <br>On ferme la bar
+                rière, affiche barrière fermée, éteind la led verte au profit de la led rouge et retourne à l'état 0. Si la voiture est toujours présente, on affiche <i>Veuillez passer</i> et on va à l'étape 4. <br>Si l'obstacle est présent, on attends qu'il parte car s'il est la, le code reste dans l'état 4 j'usqu'a ce qu'il 
+                parte. Quand il part, on va à l'état 5 et met à jour le chrono. <br>A l'étape 5, on ferme la barrière, affiche merci, et met a jour déjaDit pour pouvoir réa
+                fficher des infos. Le petit délai de 500 milisecondes sert à aérer le tout et attendre un petit peu avant de recommencer à l'étape 0.</p>
+            </div>
+        </section>
+        <section class="section">
+            <p></p>
+            <p><a href="barriere-peage.ino" target="_blank" download><u>Télécharger le code source</u></a></p>
+        </section>
+    </div>
+    <div class="Video">
+        <h2><strong>IV - Vidéo</strong></h2>
+        <section class="section">
+            <video id="video" class="video" src="IMG_7614.MOV" controls preload="metadata">
+                Votre navigateur ne prend pas en charge la lecture vidéo.
+            </video>
+        </section>
+    </div>
+    </main>
+    </div>
+    </div>
+    <script>
+        document.getElementById('btn-sommaire').addEventListener('click', function(e) {
+        e.preventDefault();
+        const som = document.querySelector('.som');
+        if (som.style.display === 'block') {
+            som.style.display = 'none';
+        } else {
+            som.style.display = 'block';
+        }
+    });
+    </script>
+</body>
+</html>
