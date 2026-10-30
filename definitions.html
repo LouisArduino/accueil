@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Définitions</title>
+    <link rel="stylesheet" href="commun.css">
+</head>
+<body>
+    <div class="header">
+            <a href="index.html" id="accueil"><img src="home_24dp_FFFFFF_FILL0_wght500_GRAD0_opsz24.svg" alt="icone de maison"><span class="nav-texte">Accueil</span></a>
+            <a href="definitions.html" id="definitions"><img src="manage_search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de loupe qui cherche dans un texte"><span class="nav-texte">Définitions</span></a>
+            <a href="https://github.com/LouisArduino" id="moi" target="_blank"><img src="person_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de personne"><span class="nav-texte">Moi</span></a>
+            <a href="https://projecthub.arduino.cc" id="arduino" target="_blank"><img src="all_inclusive_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone infini"><span class="nav-texte">Arduino</span></a>
+</div>
+    <ol>
+                <li><strong>Arduino :</strong> c'est une <strong>carte électronique</strong>, elle est dôtée d'un <strong>microcontrôleur</strong>, c'est ici que le <strong>
+                    programme est enregistré</strong> et aussi que tous les <strong>composants sont branchés</strong>. Les requêtes demandés aux composants passent par ici 
+                    également. Bref c'est le cerveau de l'oprération, sans lui il n'y a rien ! </li>
+<br>
+                <li><strong>Pin :</strong> c'est ici que se trouve la limite entre l'électronique et ce qu'il se passe. Ce sont des broches sur l'<strong>Arduino</strong> qui 
+                    permettent de relier<strong> les composants</strong> à la carte électronique.</li>
+<br>
+                <li><strong>Entrée :</strong> les composants en entrée signifient qu'ils envoie des information à l'Arduino. Par exemple un <strong>bouton</strong> dit à l'
+                    Arduino s'il est <strong>appuié</strong> ou pas.</li>
+<br>
+                <li><strong>Sortie :</strong> les composants en sortie sont l'inverse de l'entrée, ils ont besoin d'information ou d'énergie. Par exemple une led a besoin 
+                    d'énergie, elle n'envoie pas d'<strong>informations</strong> à l'arduino.</li>
+<br>
+                <li><strong>Digit :</strong> Un <strong>digit</strong> comporte les <strong>7 segments</strong> qui <strong>affichent un chiffre</strong>. Ici, on en a <strong>4
+                </strong>, mais nous n'en utilisons qu'<strong>un seul</strong>.</li>
+<br>
+                <li><strong>Digital :</strong> Un <strong>pin Digital</strong> c'est un pin (dans notre cas sur l'Arduino) qui peut <strong>lire 2 valeur</strong> : <strong>0 
+                ou 1</strong>, on l'uilise pour les <strong>composants en entrée </strong> qui n'ont que <strong>2 états</strong> (un bouton par exemple). On l'utilise également 
+                pour les composants simples en sortie.</li>
+<br>
+                <li><strong>Analogique :</strong> Un <strong>pin analogique</strong> c'est un pin (dans notre cas sur l'Arduino) qui peut lire des valeurs entre <strong>0 et 5V
+                </strong>, ensuite, il <strong>transforme</strong> cette valeur en un <strong>nombre</strong> qui va de <strong>0 à 1023</strong>. C'est utile pour les <strong>
+                composants en entrée</strong> qui <strong>varie plus qu'avec 2 états</strong> (un potentiomètre dans notre cas) et pour les composants en sortie qui on besoin
+                de <strong>valeurs</strong> ou d'<strong>informations</strong> (<u>par exemple</u> un petit moteur ou un écran).</li>
+<br>                
+                <li><strong>GND :</strong> <strong>GND</strong> signifie <strong>ground</strong>, <strong>terre en français</strong>, c'est ici que <strong>revient toute 
+                l'énergie</strong> car tous les circuits électriques doivent <strong>former une boucle. donc on les relient à l'Arduino par ici.</strong></li>
+<br>
+                <li><strong>PWM :</strong> C'est une pratique qui consite a <strong>moduler</strong> le signal digital de façon a avoir un signal "pseudo" analogique, on 
+                controle le temps que la pin envoie un signal haut et bas, pour obtenir une valeur entre 0 et 255. Par exemple : dans une seconde, on reste <strong>60%</strong> 
+                du temps à l'etat <strong>Haut</strong> et donc <strong>40%</strong> à l'état <strong>Bas</strong>, il y aura une valeur d'environ 153 (sur 255), si on l'utilise 
+                avec une <strong>led</strong>, elle clairera à <strong>60%</strong> de sa luminosité.</li>
+            </ol>
+</body>
+    <style>
+    </style>
+</html>
