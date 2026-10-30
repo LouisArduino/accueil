@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="français">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="commun.css">
+    <title>Garage Automatique</title>
+</head>
+<body>
+        <div class="header">
+            <a href="index.html" id="accueil"><img src="home_24dp_FFFFFF_FILL0_wght500_GRAD0_opsz24.svg" alt="icone de maison"><span class="nav-texte">Accueil</span></a>
+            <a href="definitions.html" id="definitions"><img src="manage_search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de loupe qui cherche dans un texte"><span class="nav-texte">Définitions</span></a>
+            <a href="https://github.com/LouisArduino" id="moi" target="_blank"><img src="person_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone de personne"><span class="nav-texte">Moi</span></a>
+            <a href="https://projecthub.arduino.cc" id="arduino" target="_blank"><img src="all_inclusive_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icone infini"><span class="nav-texte">Arduino</span></a>
+    </div>
+    <div class="page">
+    <div class="som">
+        <span class="som-titre"><h3 id="somtitle">Sommaire :</h3>
+            <img class="som-icone" src="menu_open_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="Sommaire">
+        </span>
+        <ul>
+    <details>
+        <summary><u>Explications</u></summary>
+            <ul>
+                <li class="sommaire"><a href="#intro">Intro</a></li>
+                <li class="sommaire"><a href="#quelques def">Définitions</a></li>
+                <li class="sommaire"><a href="#composants">Composants</a></li>
+                <li class="sommaire"><a href="#fonctionnement">Fonctionnement</a></li>
+            </ul>
+    </details>
+    <details>
+            <summary><u>Schémas</u></summary>
+            <ul class="sommmaire">
+                <li class="sommaire"><a href="#exp_schs">Explications du schéma</a></li>
+                <li class="sommmire"><a href="#sch_cpt">Schéma complet</a></li>
+            </ul>
+    </details>
+    <details>
+            <summary><u>Code</u></summary>
+            <ul class="sommmaire">
+                <li class="sommaire"><a href="#setup">Setup</a></li>
+                <li class="sommaire"><a href="#racc">Raccourcis</a></li>
+                <li class="sommaire"><a href="#loop">Loop</a></li>
+            </ul>
+     </details>
+               <summary><a href="#video" id="video-link"><u>Vidéo</u></a></summary>
+        </ul>
+    </div>
+    <div class="texte">
+    <main>
+    <header>
+        <h1 id="title">Projet arduino de garage automatique</h1>
+    </header>
+    <div class="Explications">
+        <h2 id="Explications"><strong>I Explications</strong></h2>
+        <img src="Capture d’écran 2026-10-29 à 17.31.09.png" id="presentation" class="img">
+        <section class="section">
+        <h3 id="intro">Introduction du projet :</h3>
+        <article>
+            Bonjour et bienvenue dans ce projet arduino qui introduit l'utilisation des <strong>servomoteur</strong>, des <strong>capteurs de distance</strong> et même la base des 
+            <strong>écrans OLED</strong>. C'est un garage avec une porte qui s'ouvre automatiquement grâce à un <strong>servomoteur</strong> qui effectue une rotation de 90° 
+            quand le <strong>capteur</strong>, placé sur le haut du garage détecte qu'une voiture arrive.
+            Ces sera aussi un bon moyen d'introduire les <strong>machines a états</strong>.
+        </article>
+        </section>
+        <section class="section">
+            <h3 id="quelques def">Quelques définitions :</h3>
+        <article id="def">
+            <p>Si vous n'avez pas encore vu le premier site sur un projet arduino, je vous conseille d'aller voir la <a href="https://louisarduino.github.io/ardmusic/#quelques%20def" target="_blank">partie sur les définitions</a> car nous allons
+            aborder des choses plus complexes ici et nous ne reverrons par forcément les définitions de base.</p>
+            <ul>
+                <li><strong>PWM :</strong> C'est une pratique qui consite a <strong>moduler</strong> le signal digital de façon a avoir un signal "pseudo" analogique, on 
+                controle le temps que la pin envoie un signal haut et bas, pour obtenir une valeur entre 0 et 255. Par exemple : dans une seconde, on reste <strong>60%</strong> 
+                du temps à l'etat <strong>Haut</strong> et donc <strong>40%</strong> à l'état <strong>Bas</strong>, il y aura une valeur d'environ 153 (sur 255), si on l'utilise 
+                avec une <strong>led</strong>, elle clairera à <strong>60%</strong> de sa luminosité.</li>
+            </ul>
+        </article>
+        </section>
+        <section class="section">
+            <h3 id="composants">Composants utilisés :</h3>
+            <article><p>
+            <h4>Composants d'<strong>entrée</strong></h4>
+                <ul>
+                <li><strong>Capteur de distance :</strong> C'est une des pièces les plus importantes du projet, c'est elle qui va détecter la voiture devant la porte de garage 
+                pour permettre d'ouvrir la porte.</li>
+                </ul>
+            <h4>Composants de <strong>sortie</strong></h4>
+            <ul>
+                <li><strong>Servomoteur : </strong>C'est un moteur très important car il nous servira pour ouvrir la porte de garage. Il est connecté à un strong <strong>pin digital PWM</strong>.</li>
+                <li>Led : Elle est simplement relié à un pin digital* (ici, pin 11). Nous n'utiliseront poas le signal PWM. Elle nous servira à annoncer que la porte va se déplacer.</li>
+                <li><strong>Buzzer :</strong> Il nous servira pour nous prévenir qu'une voiture a été détectée et que la porte va s'ouvrir.</li>
+            </ul>
+            <h4>Carte électronique :</h4>
+            <ul>
+                <li>Arduino UNO R4 minima</li>
+            </ul></p>
+            </article>
+        </section>
+        <section class="section">
+            <h3>Fonctionnement du projet :</h3>
+            <h4>Fonctionnement des composants indépendants :</h4>
+            <article><p>
+                <strong>Le servomoteur : </strong>Il se déplace en observant le signal PWM d'un pin digital. En tempos réel, il regarde combine de temps la pin digital lui envoie 
+                un <strong>signal Haut</strong> pour le comparer au signal suivant. Il est dôté d'un potentiomètre pour savoir ou il est dans l'espace et savoir de combine de degré 
+                il faut qu'il se déplace et pouvoir se corriger en temps réel.
+                <br>
+                <br>
+                <strong>Le capteur de distance : </strong>Il y a <strong>4 broches</strong> : <strong>5V et GND</strong> et 2 autres broches : <strong>TRIG </strong>et <strong>ECHO
+                </strong>. Le premier, <strong>TRIG</strong>, c'est la broche qui est relié à l'emetteur, le second, <strong>ECHO</strong> est relié au receveur.<br>
+                On envoie du courant à TRIG et on démarre un chronomètre au bout de 10 microsecondes (pour stabiliser), on arrête d'envoyer du courant à <strong>l'emetteur</strong> 
+                et on active <strong>ECHO</strong> pour receoir le signal, quand <strong>ECHO</strong> reçoit le signal, on arrête le chronomètre. Maintenant on a une <strong>mesure de temps :</strong> le 
+                temps que met l'onde sonore pour faire <strong>un allé vers l'objet puis revenir</strong>, on connais la vitesse du son dans l'air on <strong>multiplie</strong> ce temps par <strong>la vitesse du son</strong> et on <strong>divise par 
+                2</strong> (car l'onde sonore fait un allé et retour), on a notre distance ! On stocke cette distance dans une variable et on fait ça des centaines de fois par seconde pour connaitre 
+                précisément la distance de l'objet devant nous.
+                <br>
+                <br>
+                <strong>Ecran OLED : </strong>L'écran OLED est un peu plus compliqué, il utilise les pin A5 et A4 car ils sont compatibles SCL et SDA, ce sont des technologies qu'utilise notre écran. Nous utilisons une bibliothèque spéciale pour cet écran.
+                Attention si vous essayez de réutiliser l'écran faites attention à la mémoire de votre carte, l'écran consomme beaucoup de mémoire pour être fluide, si vous utiliser une carte 
+                arduino UNO R4 c'est bon car il y a 32ko de mémoire mais une R3 n'a que 4ko donc il faudra utiliser un autre moyen plus léger. Vérifier bien la mémoire de votre microcontrôleur.</p>
+            </article>
+            <br>
+            <br>
+            <h3 id="fonctionnement">Fonctionnemnt du projet :</h3>
+            <article><p>
+            Nous utilisons une <strong>machine a états :</strong> il y a 3 état. Quand on démarre, c'est <strong>l'état 0</strong> (en code on commence toujours une liste par 0), il n'y a pas de voiture. Si une 
+            voiture est détectée (obstace à moins de 22cm(cela dépend de votre maquette et votre voiture)) On <strong>affiche sur l'écran</strong> "Ne bougez pas", on <strong>change la variable état</strong> en 
+            1 et on <strong>lance un chronomètre</strong> pour attendre 1 seconde. Si cette variable état est égale à 1, quand le chrone est égal à 1 seconde et que la voiture est toujours là (bas ou sinon ça 
+            ne sert à rien d'ouvrir), "'Je ne sais plus si quand on ouvre c'est l'état 1 ou 2'"</p>
+            </article>
+            <br><br>
+        </section>
+    </div>
+    <div class="Schemas">
+            <h2 id="partie 2"><strong>II - schémas</strong></h2><br>
+        <section class="section">
+            <h3 id="exp_schs">Explication du schéma :</h3>
+            <h3 class="exp_schs">Schéma du servomoteur :</h3>
+            <div class="contener">
+                <!--Image du schéma du servomoteur-->
+                <img src="Capture d’écran 2026-10-27 à 10.10.09.png" alt="Shéma du capteur du servomoteur" class="img">
+                <div class="in" id="txt"><p>Ci-contre, le <strong>schéma du servomoteur</strong>. On voit qu'il est branché au <strong>pin digital N°9</strong> car c'est un pin digital compatible PWM, 
+                il est aussi relié au <strong>5V</strong> et au <strong>GND</strong>.</p></div>
+            </div>
+            <h3>Schéma du capteur de distance</h3>
+            <div class="contener">
+                <!--Image du schéma du capteur de distance-->
+                <img src="Capture d’écran 2026-10-27 à 10.10.38.png" alt="Shéma du capteur de distance" class="img">
+                <div class="in"><p>Voici le <strong>schéma du capteur de distance</strong>, la broche TRIG est reliée <strong>au pin digital N°7</strong> et ECHO au pin digital <strong>N°8</strong>, la broche VCC est reliée au <strong>5V</strong> et la broche GND au <strong>GND</strong>.</p></div>
+            </div>
+            <h3>Schéma de l'écran OLED</h3>
+            <div class="contener">
+                <!--Image du schéma de l'écran OLED-->
+                <div class="in"><p>Pour <strong>l'écran OLED</strong>. Les broches SCL et SDA sont respectivement reliées aux pins A5 et A4, elles sont compatibles avec SCL et SDA que l'écran utilise. Les broches VCC et GND sont reliées au <strong>5V</strong> et au <strong>GND</strong>.</p></div> 
+            </div>
+        </section>
+    </div>
+    <div class="Code">
+            <h2>III - code</h2>
+        <section class="section">
+            <h3 id="structure_base">Structure d'un programme de base :</h3>
+            <div class="contener">
+                <div class="in">
+                    <pre class="code-window"><code><span class="rouge">void</span> <span class="violetclair">setup</span><span class="jaune">() {</span> 
+    <span class="gris">// C'est ici que l'on déclare les composants</span>
+<span class="jaune">}</span>
+<span class="rouge">void</span> <span class="violetclair">loop</span><span class="jaune">() {</span>
+    <span class="gris">// Ici, c'est une boucle, tout ce que l'on met se 
+    répète des centaines de fois par secondes    </span>
+<span class="jaune">}</span></code></pre>
+                </div>
+                <div class="in"><p>Il y a le « setup » pour annoncer les composants et s’ils sont en entrée ou en sortie <br> <br>
+                    Et le loop. C’est là que toutes les choses se passent en boucle  C’est ici que l’on dit aux composants ce qu’il faut faire.</p></div>
+            </div>
+            <h3 id="setup">Setup :</h3>
+            <div class="contener">
+                    <pre class="code-window"><code><span class="rouge">void</span> <span class="violetclair">setup</span><span class="jaune">() {</span> 
+  myservo.<span class="violetclair">attach</span><span class="violet">(</span><span class="vert">9</span><span class="violet">);</span>
+  u8g2.<span class="violetclair">begin</span><span class="violet">()</span><span class="blanc">;</span>
+  <span class="violetclair">pinMode</span><span class="violet">(</span><span class="bleufonce">PIN_TRIG</span><span class="blanc">, </span><span class="bleu">OUTPUT</span><span class="violet">)</span>;
+  <span class="violetclair">pinMode</span><span class="violet">(</span><span class="bleufonce">PIN_ECHO</span>,<span class="bleu">INPUT</span><span class="violet">)</span>;
+  <span class="violetclair">pinMode</span><span class="violet">(</span><span class="bleufonce">led</span>, <span class="bleu">OUTPUT</span><span class="violet">)</span>;
+  <span class="bleufonce">Serial</span><span class="violetclair">.begin(</span><span class="vert">9600</span><span class="violet">)</span>;
+  <span class="bleufonce">Serial</span><span class="violetclair">.println(</span><span class="vert">"Système opérationel"</span><span class="violet">)</span>;
+  u8g2.<span class="violetclair">clearBuffer</span><span class="violet">()</span>;
+  u8g2.<span class="violetclair">setFont</span><span class="violet">(</span><span class="blanc">u8g2_font_helvB18_tr</span><span class="violet">)</span>;
+  u8g2.<span class="violetclair">drawStr</span><span class="violet">(</span><span class="vert">10</span>, <span class="vert">30</span>, <span class="vert">"Bonjour !"</span><span class="violet">)</span>;
+  u8g2.<span class="violetclair">setFont</span><span class="violet">(</span><span class="blanc">u8g2_font_helvB10_tr</span><span class="violet">)</span>;
+  u8g2.<span class="violetclair">drawStr</span><span class="violet">(</span><span class="vert">15</span>, <span class="vert">54</span>, <span class="vert">"avancez svp."</span ><span class="violet">)</span>;           
+  u8g2.<span class="violetclair">sendBuffer()</span>;
+  <span class="violet">delay(</span><span class="vert">3000</span><span class="violet">)</span>;
+  <span class="rouge">int</span> angleActuel = myservo.<span class="violet">read()</span><span class="blanc">;
+  <span class="violet">if(</span><span class="blanc">angleActuel == <span class="vert">0</span></span><span class="violet">){</span>
+    <span class="violet">for</span><span class="bleu">(</span><span class="rouge">int</span> d = <span class="vert">0</span>; d < <span class="vert">80</span>; d++<span class="bleu">){</span>
+          myservo.<span class="violet">write</span><span class="jaune">(</span><span class="vert">d</span><span class="jaune">)</span>;
+          <span class="violetclair">delay</span><span class="violet">(</span><span class="vert">17</span><span class="violet">)</span>;
+        <span class="bleu">}</span>
+      <span class="violet">}</span>
+      <span class="violetclair">else</span><span class="violet">{</span>
+        <span class="violetclair">for</span><span class="violet">(</span><span class="rouge">int</span> d = angleActuel; d < <span class="vert">80</span>; d++<span class="violet">){</span>
+          myservo.<span class="violet">write</span><span class="jaune">(</span><span class="vert">d</span><span class="jaune">)</span>;
+          <span class="violetclair">delay</span><span class="violet">(</span><span class="vert">17</span><span class="violet">)</span>;
+        <span class="bleu">}</span>
+      <span class="violet">}</span>
+<span class="jaune">}</span>
+</code></pre>
+                <p class="explcode"><i>myservo.attach(9)</i> signifie que la broche data du servomoteur est branché sur la pin 9 de l'arduino. <br>
+                <i>u8g2.begin</i> vient de la bibliothèque U8g2lib qui est utilisée pour contrôler notre écran. Cette ligne signifie que l'on intie notre écran, on va l'utiliser. <br>
+                <i>Serial.begin(9600)</i> veut dire que l'on intie également le moniteur série* 9600 étant la fréquence. <br>
+                Les 6 lignes qui commencent par <i>u8g2</i> sont pour l'écran, la première retire tout ce qu'il y a écrit sur l'écran pour écrire de nouvelles choses.
+                A chaque fois on choisit la police avec <i>u8g2.setFont</i> et l'emplacement, ce sont les coordonnées en pixel juste avant le texte. 
+                Quand on a fini, on envoie tout avec <i>u8g2.sendBuffer()</i> <br> Ce sont toutes des fonctions qui peuvent être utilisés grace à la librairie. <br>
+                Après le petit délai, le servomoteur entre en jeu. <br> On commence par lire l'angle actuel du servomoteur, ensuite, s'il est égal à 0, 
+                on ferme la porte, 80° étant l'état porte fermée. La boucle <i>for</i> sert à découper l'action et 80 petits mouvements avec un petit délai
+                pour que la fermeture ne soit pas trop rapide. Si l'angle n'est pas égal à 0°, on fait la même chose depuis l'angle actuel.</p>
+            </div>
+            <h3 id="racc">Les définitons pour l'écran et le servomoteur :</h3>
+            <h4>Bibliothèques</h4>
+                <p>Voici les bibliothèques que l'on inclu avec #include pour utiliser le servomoteur et l'écran.</p>
+            <div class="contener">
+                <pre class="code-window"><code><span class="violet">#include</span> <span class="bleuciel">&lt;Servo.h&gt;</span>
+<span class="violet">#include</span><span class="bleuciel"> &lt;U8g2lib.h&gt;</span></code></pre>
+                <p>Servo.h est une bibliothèque pour le servomoteur, elle a des fonctions simples.</p>
+                <p>U8g2lib.h est une bibliothèque pour l'écran, elle a des fonctions simples pour écrire et dessinersur l'écran.</p>
+            </div>
+                <h4>Servomoteur</h4>
+                <div class="contener">
+                    <pre class="code-window"><code>Servo myservo;</code></pre>
+                    <p><i>myservo est une fonction de la librairie servo, elle sert a doné un nom à notre servomoteur pour pouvoir le désigner.</i></p>
+                </div>
+                <h4>Ecran</h4>
+                <div class="contener">
+                    <pre class="code-window" id="initiatescreen"><code><span class="bleucanard">U8G2_SSD1306_128X64_NONAME_F_HW_I2C</span> u8g2<span class="jaune">(</span><span class="bleucanard">U8G2_R0</span>, /* reset=*/ <span class="bleucanard">U8X8_PIN_NONE</span><span class="jaune">)</span>;</code></pre>
+                    <p>Cette ligne sert à renseigner les caractéristiques de l'écran pour que la bibliothèque sache comment envoyer les infos, on ne précise pas sur quelle broche il se trouve 
+                    car on ne peut en même qu'un seul par carte, on les connectent aux broches A5 et A4 de la carte qui gèrent l'écran i2c.
+                    </p>
+                </div>
+                <br>
+                
+            <h3 id="loop">Loop</h3>
+            <div class="contener">
+            <div class="contener">
+                <pre class="code-window" id="loop"><code><span class="rouge">void</span> <span class="violetclair">loop</span><span class="violet">()</span> <span class="jaune">{</span>
+  <span class="violetclair">detection</span><span class="violet">()</span>;
+    <span class="violetfonce">if</span> <span class="violet">(</span>etatSysteme == <span class="vert">0</span><span class="violet">){</span>
+      u8g2.<span class="violetclair">clearBuffer</span><span class="bleu">()</span>;
+      u8g2.<span class="violetclair">setFont</span><span class="bleu">(</span>u8g2_font_helvB18_tr<span class="bleu">)</span>;
+      u8g2.<span class="violetclair">drawStr</span><span class="bleu">(</span><span class="vert">10</span>, <span class="vert">30</span>, <span class="bleuclair">"Bonjour !"</span><span class="bleu">)</span>;
+      u8g2.<span class="violetclair">setFont</span><span class="bleu">(</span>u8g2_font_helvB18_tr<span class="bleu">)</span>;
+      u8g2.<span class="violetclair">drawStr</span><span class="bleu">(</span><span class="vert">15</span>, <span class="vert">54</span>, <span class="bleuclair">"avancez svp."</span><span class="bleu">)</span>;
+      u8g2.<span class="violetclair">sendBuffer</span><span class="bleu">()</span>;
+      <span class="violetfonce">if</span> <span class="bleu">(</span>contrDistance <= <span class="vert">20</span><span class="bleu">){</span>
+        etatSysteme = <span class="vert">1</span>;
+        chronoDetecton = <span class="violetclair">millis</span><span class="jaune">()</span>;
+        Serial.<span class="violetclair">println</span><span class="jaune">(</span><span class="bleu">"Veuillez rester en place pour procéder à l'ouverture de la porte"</span><span class="jaune">)</span>;
+        u8g2.<span class="violetclair">clearBuffer</span><span class="jaune">()</span>;
+        u8g2.<span class="violetclair">setFont</span><span class="jaune">(</span>u8g2_font_helvB12_tr<span class="jaune">)</span>; 
+        u8g2.<span class="violetclair">drawStr</span><span class="jaune">(</span><span class="vert">5</span>, <span class="vert">40</span>, <span class="bleuclair">"Ne bougez pas"</span><span class="jaune">)</span>;
+        u8g2.<span class="violetclair">sendBuffer</span><span class="jaune">()</span>;
+      <span class="bleu">}</span>
+    <span class="violet">}</span> <span class="violetfonce">else if</span><span class="violet">(</span>etatSysteme == <span class="vert">1</span><span class="violet">)</span><span class="violet">{</span>
+      <span class="violetfonce">if</span><span class="jaune">(</span>contrDistance <= <span class="vert">20</span><span class="jaune">)</span><span class="jaune">{</span>
+        <span class="violetfonce">if</span><span class="jaune">(</span><span class="violetclair">millis</span><span class="violet">()</span> - chronoDetecton >= <span class="vert">1000</span><span class="jaune">)</span><span class="jaune">{</span>
+          etatSysteme = <span class="vert">2</span>;
+          <span class="violetclair">digitalWrite</span><span class="violet">(</span><span class="bleu">led</span>, HIGH<span class="violet">)</span>;
+          <span class="violetclair">tone</span><span class="violet">(</span><span class="bleu">buzzer</span>, <span class="vert">900</span>, <span class="vert">500</span><span class="violet">)</span>;
+          <span class="violetfonce">for</span><span class="violet">(</span><span class="rouge">int</span> d = <span class="vert">95</span>; d >= <span class="vert">0</span>; d--<span class="violet">){</span>
+            myservo.<span class="violet">write</span><span class="bleu">(</span>d<span class="bleu">)</span>;
+            <span class="violet">delay</span><span class="bleu">(</span><span class="vert">17</span><span class="bleu">)</span>;
+          <span class="violet">}</span>
+        
+          chronoOuverture = <span class="violetclair">millis</span><span class="violet">()</span>;
+          Serial.<span class="violetclair">println</span><span class="jaune">(</span><span class="bleu">"Porte ouverte vous pouvez entrer"</span><span class="jaune">)</span>;
+          u8g2.<span class="violetclair">clearBuffer</span><span class="jaune">()</span>;
+          u8g2.<span class="violetclair">setFont</span><span class="jaune">(</span>u8g2_font_helvB12_tr<span class="jaune">)</span>; 
+          u8g2.<span class="violetclair">drawStr</span><span class="jaune">(</span><span class="vert">10</span>, <span class="vert">40</span>, <span class="bleuclair">"OUVERT !"</span><span class="jaune">)</span>;
+          u8g2.<span class="violetclair">sendBuffer</span><span class="jaune">()</span>;
+        <span class="jaune">}</span>
+      <span class="bleu">}</span>
+      <span class="violetfonce">else</span><span class="bleu">{</span>
+        etatSysteme = <span class="vert">0</span>;
+      <span class="bleu">}</span>
+    <span class="violet">}</span> <span class="violetfonce">else if</span><span class="violet">(</span>etatSysteme == <span class="vert">2</span><span class="violet">)</span><span class="violet">{</span>
+    <span class="violetfonce">if</span><span class="bleu">(</span><span class="violetclair">millis</span><span class="jaune">()</span> - chronoDetecton >= <span class="vert">6000</span><span class="bleu">){</span>
+        etatSysteme = <span class="vert">0</span>;
+        <span class="violetfonce">for</span><span class="jaune">(</span><span class="rouge">int</span> d = <span class="vert">0</span>; d < <span class="vert">95</span>; d++<span class="jaune">){</span>
+          myservo.<span class="violet">write</span><span class="bleu">(</span>d<span class="bleu">)</span>;
+          <span class="violet">delay</span><span class="bleu">(</span><span class="vert">17</span><span class="bleu">)</span>;
+        <span class="jaune">}</span>
+        <span class="violetclair">digitalWrite</span><span class="violet">(</span><span class="bleu">led</span>, LOW<span class="violet">)</span>;
+        Serial.<span class="violetclair">println</span><span class="jaune">(</span><span class="bleu">"Porte fermée"</span><span class="jaune">)</span>;
+        u8g2.<span class="violetclair">clearBuffer</span><span class="jaune">()</span>;
+        u8g2.<span class="violetclair">setFont</span><span class="jaune">(</span>u8g2_font_helvB12_tr<span class="jaune">)</span>; 
+        u8g2.<span class="violetclair">drawStr</span><span class="jaune">(</span><span class="vert">10</span>, <span class="vert">40</span>, <span class="bleuclair">"FERME !"</span><span class="jaune">)</span>;
+        u8g2.<span class="violetclair">sendBuffer</span><span class="jaune">()</span>;
+        <span class="violet">delay</span><span class="jaune">(</span><span class="vert">3000</span><span class="jaune">)</span>;
+        u8g2.<span class="violetclair">clearBuffer</span><span class="bleu">()</span>;
+        u8g2.<span class="violetclair">setFont</span><span class="bleu">(</span>u8g2_font_helvB18_tr<span class="bleu">)</span>;
+        u8g2.<span class="violetclair">drawStr</span><span class="bleu">(</span><span class="vert">10</span>, <span class="vert">30</span>, <span class="bleuclair">"Bonjour !"</span><span class="bleu">)</span>;
+        u8g2.<span class="violetclair">setFont</span><span class="bleu">(</span>u8g2_font_helvB18_tr<span class="bleu">)</span>;
+        u8g2.<span class="violetclair">drawStr</span><span class="bleu">(</span><span class="vert">15</span>, <span class="vert">54</span>, <span class="bleuclair">"avancez svp."</span><span class="bleu">)</span>;
+        u8g2.<span class="violetclair">sendBuffer</span><span class="bleu">()</span>;
+      <span class="bleu">}</span>
+    <span class="violet">}</span>
+  <span class="jaune">}</span></pre></code>
+                <p><i>detection()</i> est une fonction que j'ai crée pour ne pas devoir écrire 10 ligne de code en plus, j'écris juse <i>detection()</i> pour effectuer l'action. <br>Ici, on utilise une machine a états. Il y a 3 états, le premier et l'état par défaut. 
+                On commence par écrire un message accueillant sur l'écran. Si la distance mesurée est inférieure à 20cm soit une voiture devant le garage, on met a jour chronoDetecton 
+                pour que l'on puisse vérifier par la suite si ça fait 1 seconde : si la voiture est présente, on lance le chrono, on passe à l'étape 1 qui sert à vérifier si 
+                ça fait 1 seconde et que la voiture est toujours présente. Si oui, lance un son "bip" grâce au buzzer. 900 est la tonatilé et 500 est le temps en ms que le buzzer 
+                fait du bruit. On allume la led qui montre le déplacement de la porte et on lance l'ouvreture de la porte. On met a jour <i>chronoOverture</i> pour pouvoir refermer la porte 
+                6 secondes après et on affiche un message qui dit que la porte est ouverte. <br>
+                Le <i>else</i> correspond au <i>if(contrDistance <= 20)</i> ce qui signifie que si la voiture n'est plus présente, on retourne à l'étape 1. <br><br>
+                Juste avant d'ouvrir la porte, on a défini l'étape à 2 et mis a jour chronoOuverture donc si ça fait 6 secondes on referme la porte, éteind la led et affiche un message 
+                "porte fermée". <br>On met un délai de 3 secondes pour laisser du temps avant la prochaine action et on affiche le message d'accueil. <br>
+                Vous remarquerez que la pluspart du temps, on utilise les variable que l'on met a jour avec millis() pour compter le temps car delay arrêt tout l'action de la carte, donc avec millis() 
+                on peut continuer les vérifications et d'autres actions en même temps, mais à la fin du code, je ne l'utilise pas car on n'a pas besoin d'effectuer d'autres actions.</p>
+            </div>
+        </section>
+        <section class="section">
+            <p>Merci d'avoir tout lu. Bien sûr le code n'est pas parfait et comporte surement des erreurs. Le code est open-source et je vous invite à l'améliorer.</p>
+            <p><a href="main.cpp" target="_blank" download><u>Télécharger le code source</u></a></p>
+        </section>
+    </div>
+    <div class="Video">
+        <h2><strong>IV - Vidéo</strong></h2>
+        <section class="section">
+            <video id="video" class="video" src="Garage automatique.mp4" controls preload="metadata">
+                Votre navigateur ne prend pas en charge la lecture vidéo.
+            </video>
+        </section>
+    </div>
+    </main>
+    </div>
+    </div>
+</body>
+</html>
