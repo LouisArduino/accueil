@@ -334,3 +334,11 @@ summary:hover{
 #dowload{
     color: blue;
 }
+.small{
+    font-size: smaller;
+}
+.mailend{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
